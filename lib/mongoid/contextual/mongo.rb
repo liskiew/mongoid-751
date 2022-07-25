@@ -679,7 +679,7 @@ module Mongoid
         Mongoid::Warnings.warn_id_sort_deprecated if opts.try(:key?, :id_sort)
 
         begin
-          if sort = criteria.options[:sort] || ( { _id: 1 } unless opts.try(:fetch, :id_sort) == :none )
+          if sort = criteria.options[:sort] || ( { _id: 1 } unless opts.try(:fetch, :id_sort, :none) == :none )
             @view = view.sort(Hash[sort.map{|k, v| [k, -1*v]}])
           end
           yield
