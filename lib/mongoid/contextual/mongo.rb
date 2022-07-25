@@ -269,7 +269,7 @@ module Mongoid
             Mongoid::Warnings.warn_id_sort_deprecated
           end
           sorted_view = view
-          if sort = view.sort || ({ _id: 1 } unless limit_or_opts.try(:fetch, :id_sort) == :none)
+          if sort = view.sort || ({ _id: 1 } unless limit_or_opts.try(:fetch, :id_sort, :none) == :none)
             sorted_view = view.sort(sort)
           end
           if raw_docs = sorted_view.limit(limit || 1).to_a
